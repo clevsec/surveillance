@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - My Content Portal</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6; /* Light gray background */
+        }
+        .message-box {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #4CAF50; /* Green */
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        .message-box.show {
+            opacity: 1;
+        }
+        .message-box.error {
+            background-color: #f44336; /* Red */
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white shadow-md p-6">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-3xl font-bold rounded-md">My Awesome Portal</h1>
+            <nav>
+                <ul class="flex space-x-6">
+                    <li><a href="index.html" class="text-lg hover:text-blue-200 transition duration-300 rounded-md p-2">Home</a></li>
+                    <li><a href="contact.html" class="text-lg hover:text-blue-200 transition duration-300 rounded-md p-2">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Area - Contact Form -->
+    <main class="container mx-auto p-8 flex-grow">
+        <h2 class="text-4xl font-extrabold text-gray-800 mb-10 text-center">Contact Us</h2>
+        <div class="max-w-xl mx-auto bg-white p-8 rounded-lg shadow-lg">
+            <p class="text-gray-700 mb-6 text-center">
+                Have questions or feedback? Feel free to reach out to us using the form below.
+            </p>
+            <form id="contact-form" action="https://formspree.io/f/YOUR_FORMSPREE_ENDPOINT" method="POST" class="space-y-6">
+                <!-- IMPORTANT: Replace YOUR_FORMSPREE_ENDPOINT with your actual Formspree endpoint -->
+                <!-- Example: action="https://formspree.io/f/xbjnqklp" -->
+
+                <div>
+                    <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Name:</label>
+                    <input type="text" id="name" name="name" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Your Name" required>
+                </div>
+                <div>
+                    <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email:</label>
+                    <input type="email" id="email" name="_replyto" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="your.email@example.com" required>
+                </div>
+                <div>
+                    <label for="message" class="block text-gray-700 text-sm font-bold mb-2">Message:</label>
+                    <textarea id="message" name="message" rows="6" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-y" placeholder="Your message..." required></textarea>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full focus:outline-none focus:shadow-outline transition duration-300 transform hover:scale-105">
+                        Send Message
+                    </button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white p-6 mt-10 rounded-t-lg">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2025 My Content Portal. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Message Box for notifications -->
+    <div id="message-box" class="message-box"></div>
+
+    <script>
+        // --- Utility Function for messages ---
+        function showMessage(message, isError = false) {
+            const msgBox = document.getElementById('message-box');
+            msgBox.textContent = message;
+            msgBox.className = 'message-box show ' + (isError ? 'error' : '');
+            setTimeout(() => {
+                msgBox.className = 'message-box'; // Hide after 3 seconds
+            }, 3000);
+        }
+
+        // --- Formspree success/error handling (client-side) ---
+        const contactForm = document.getElementById('contact-form');
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault(); // Prevent default form submission
+
+            const form = e.target;
+            const data = new FormData(form);
+            try {
+                const response = await fetch(form.action, {
+                    method: form.method,
+                    body: data,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                if (response.ok) {
+                    showMessage("Message sent successfully!");
+                    form.reset(); // Clear the form
+                } else {
+                    const result = await response.json();
+                    if (result.errors) {
+                        showMessage(result.errors.map(error => error.message).join(", "), true);
+                    } else {
+                        showMessage("Failed to send message. Please try again.", true);
+                    }
+                }
+            } catch (error) {
+                console.error("Network error:", error);
+                showMessage("A network error occurred. Please try again.", true);
+            }
+        });
+    </script>
+</body>
+</html>
