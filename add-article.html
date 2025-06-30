@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Admin panel for adding articles on security camera installation in Cleveland, OH, and 100 nearby cities. Experts in Hikvision, Dahua, Ubiquiti, Lorex, Swann, Reolink, and more.">
+  <title>Add Article - Surveillance Forum</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <h1>Add New Article</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="brands.html">CCTV Brands</a>
+      <a href="wifi-networks.html">Wi-Fi Networks</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+  <main>
+    <div id="auth-section">
+      <h2>Admin Login</h2>
+      <input type="email" id="email" placeholder="Email" required>
+      <input type="password" id="password" placeholder="Password" required>
+      <button onclick="login()">Login</button>
+      <button onclick="logout()" style="display: none;" id="logout-btn">Logout</button>
+    </div>
+    <div id="article-form" style="display: none;">
+      <h2>Create Article</h2>
+      <input type="text" id="title" placeholder="Article Title (e.g., Ubiquiti Installation in Akron)" required>
+      <textarea id="content" placeholder="Article Content" required></textarea>
+      <select id="category" required>
+        <option value="ip-cameras">IP Cameras</option>
+        <option value="cctv">CCTV</option>
+        <option value="dvr-nvr">DVR/NVR</option>
+        <option value="ubiquiti">Ubiquiti</option>
+        <option value="wifi">Wi-Fi Antennas</option>
+      </select>
+      <input type="text" id="youtube-url" placeholder="YouTube URL (optional)">
+      <input type="file" id="media" accept="image/*,.pdf">
+      <button onclick="addArticle()">Add Article</button>
+    </div>
+  </main>
+  <footer>
+    <p>© 2025 Surveillance Forum | Serving Cleveland, OH, and 100 nearby cities including Akron, Lakewood, Parma, Mentor, and more. Experts in Hikvision, Dahua, Ubiquiti, Lorex, Swann, Reolink, and all CCTV brands.</p>
+  </footer>
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-storage.js"></script>
+  <script src="js/script.js"></script>
+  <script>
+    // Initialize Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyAbUgLFZH2deXsw37g4DYRkJbRxDS0woXw",
+      authDomain: "content-df158.firebaseapp.com",
+      projectId: "content-df158",
+      storageBucket: "content-df158.firebasestorage.app",
+      messagingSenderId: "878160264892",
+      appId: "1:878160264892:web:dc80286f84ff5122c09ab9"
+    };
+    firebase.initializeApp(firebaseConfig);
+    // Check auth state
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        document.getElementById('auth-section').style.display = 'none';
+        document.getElementById('article-form').style.display = 'block';
+        document.getElementById('logout-btn').style.display = 'inline-block';
+      } else {
+        document.getElementById('auth-section').style.display = 'block';
+        document.getElementById('article-form').style.display = 'none';
+        document.getElementById('logout-btn').style.display = 'none';
+      }
+    });
+  </script>
+</body>
+</html>
