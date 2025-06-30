@@ -1,118 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Content Portal</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts - Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f3f4f6; /* Light gray background */
-        }
-        .article-card {
-            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-        }
-        .article-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Expert security camera installation in Cleveland, OH, and 100 nearby cities. Specializing in Hikvision, Dahua, Ubiquiti, Lorex, Swann, Reolink, and all CCTV brands for IP cameras, DVR/NVR, and Wi-Fi networks.">
+  <meta name="keywords" content="security camera installation Cleveland OH, CCTV installation, Hikvision, Dahua, Ubiquiti, Lorex, Swann, Reolink, IP cameras, DVR, NVR, Wi-Fi antennas, surveillance, Akron, Lakewood, Parma, Mentor">
+  <meta name="geo.region" content="US-OH">
+  <meta name="geo.placename" content="Cleveland, OH">
+  <meta name="robots" content="index, follow">
+  <title>Surveillance & Security Forum - Cleveland, OH</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
-<body class="min-h-screen flex flex-col">
-    <!-- Header -->
-    <header class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white shadow-md p-6">
-        <div class="container mx-auto flex justify-between items-center">
-            <h1 class="text-3xl font-bold rounded-md">My Awesome Portal</h1>
-            <nav>
-                <ul class="flex space-x-6">
-                    <li><a href="index.html" class="text-lg hover:text-blue-200 transition duration-300 rounded-md p-2">Home</a></li>
-                    <li><a href="contact.html" class="text-lg hover:text-blue-200 transition duration-300 rounded-md p-2">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
-    <!-- Main Content Area - Articles List -->
-    <main class="container mx-auto p-8 flex-grow">
-        <h2 class="text-4xl font-extrabold text-gray-800 mb-10 text-center">Latest Articles</h2>
-        <div id="articles-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Articles will be loaded here by JavaScript -->
-        </div>
-    </main>
-
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-white p-6 mt-10 rounded-t-lg">
-        <div class="container mx-auto text-center">
-            <p>&copy; 2025 My Content Portal. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <script>
-        // --- Article Data Management ---
-        // To add a new article:
-        // 1. Create a new HTML file (e.g., 'article-my-new-post.html') based on 'article.html'.
-        // 2. Add an object for your new article to this 'articlesData' array below.
-        //    Make sure the 'link' property points to your new article's HTML file.
-        const articlesData = [
-            {
-                id: 'article-welcome-to-portal',
-                title: 'Welcome to the Portal!',
-                description: 'Discover the exciting world of content creation with our new platform. Learn how to get started and share your stories.',
-                image: 'https://placehold.co/400x250/FF6347/FFFFFF?text=Welcome+Image',
-                link: 'article-1.html' // Link to the specific article HTML file
-            },
-            {
-                id: 'article-tech-trends',
-                title: 'Top 5 Tech Trends of 2025',
-                description: 'Explore the cutting-edge technologies shaping our future, from AI advancements to sustainable innovations.',
-                image: 'https://placehold.co/400x250/4682B4/FFFFFF?text=Tech+Trends',
-                link: 'article-2.html'
-            },
-            {
-                id: 'article-healthy-living',
-                title: 'A Guide to Healthy Living',
-                description: 'Simple tips and tricks to improve your well-being, including nutrition, exercise, and mental health practices.',
-                image: 'https://placehold.co/400x250/32CD32/FFFFFF?text=Healthy+Life',
-                link: 'article-3.html'
-            },
-            // Add more articles here
-            // {
-            //     id: 'article-your-new-article',
-            //     title: 'Your New Article Title',
-            //     description: 'A brief description of your amazing new article.',
-            //     image: 'https://placehold.co/400x250/8A2BE2/FFFFFF?text=New+Article',
-            //     link: 'article-your-new-article.html'
-            // }
-        ];
-
-        // Function to render articles on the page
-        function renderArticles() {
-            const container = document.getElementById('articles-container');
-            container.innerHTML = ''; // Clear existing content
-
-            articlesData.forEach(article => {
-                const articleCard = document.createElement('div');
-                articleCard.className = 'article-card bg-white rounded-lg shadow-lg overflow-hidden flex flex-col h-full';
-                articleCard.innerHTML = `
-                    <a href="${article.link}" class="block h-full flex flex-col">
-                        <img src="${article.image}" alt="${article.title}" class="w-full h-48 object-cover">
-                        <div class="p-6 flex flex-col flex-grow">
-                            <h3 class="text-xl font-semibold text-gray-900 mb-2">${article.title}</h3>
-                            <p class="text-gray-600 text-sm flex-grow">${article.description}</p>
-                            <span class="mt-4 text-blue-600 hover:text-blue-800 font-medium self-end">Read More &rarr;</span>
-                        </div>
-                    </a>
-                `;
-                container.appendChild(articleCard);
-            });
-        }
-
-        // Render articles when the page loads
-        document.addEventListener('DOMContentLoaded', renderArticles);
-    </script>
+<body>
+  <header>
+    <h1>Surveillance & Security Forum - Cleveland, OH</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="brands.html">CCTV Brands</a>
+      <a href="wifi-networks.html">Wi-Fi Networks</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="search-bar">
+      <input type="text" id="search" placeholder="Search articles (e.g., Hikvision installation Akron)">
+      <button onclick="searchArticles()">Search</button>
+    </div>
+  </header>
+  <main>
+    <section class="intro">
+      <h2>Expert Security Camera Installation in Cleveland & Beyond</h2>
+      <p>We specialize in installing Hikvision, Dahua, Ubiquiti, Lorex, Swann, Reolink, and all major CCTV brands across Cleveland, OH, and 100 nearby cities like Akron, Lakewood, Parma, and Mentor. From IP cameras to DVR/NVR systems and Wi-Fi antennas, we’re your trusted experts for surveillance solutions.</p>
+    </section>
+    <div class="filter-bar">
+      <button onclick="filterArticles('all')">All</button>
+      <button onclick="filterArticles('ip-cameras')">IP Cameras</button>
+      <button onclick="filterArticles('cctv')">CCTV</button>
+      <button onclick="filterArticles('dvr-nvr')">DVR/NVR</button>
+      <button onclick="filterArticles('ubiquiti')">Ubiquiti</button>
+      <button onclick="filterArticles('wifi')">Wi-Fi Antennas</button>
+    </div>
+    <div id="articles"></div>
+  </main>
+  <footer>
+    <p>© 2025 Surveillance Forum | Serving Cleveland, OH, and 100 nearby cities including Akron, Lakewood, Parma, Mentor, and more. Experts in Hikvision, Dahua, Ubiquiti, Lorex, Swann, Reolink, and all CCTV brands.</p>
+    <div class="city-links">
+      <a href="#akron">Akron</a> | <a href="#lakewood">Lakewood</a> | <a href="#parma">Parma</a> | <a href="#mentor">Mentor</a> | <a href="#elyria">Elyria</a> <!-- Add all 100 cities similarly -->
+      <!-- Full list omitted for brevity; see brands.html for complete city list -->
+    </div>
+  </footer>
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-storage.js"></script>
+  <script src="js/script.js"></script>
+  <script>
+    // Initialize Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyAbUgLFZH2deXsw37g4DYRkJbRxDS0woXw",
+      authDomain: "content-df158.firebaseapp.com",
+      projectId: "content-df158",
+      storageBucket: "content-df158.firebasestorage.app",
+      messagingSenderId: "878160264892",
+      appId: "1:878160264892:web:dc80286f84ff5122c09ab9"
+    };
+    firebase.initializeApp(firebaseConfig);
+    // Load articles
+    loadArticles('all');
+  </script>
 </body>
 </html>
